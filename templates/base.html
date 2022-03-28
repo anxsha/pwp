@@ -1,0 +1,20 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - pwp</title>
+<link rel="stylesheet" href="https://unpkg.com/twinklecss@1.1.0/twinkle.min.css"/>
+<nav>
+  <ul>
+    {% if g.user %}
+      <li><span>{{ g.user['username'] }}</span>
+      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+    {% endif %}
+  </ul>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div>{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  Error 404
+      {% if not g.user %}
+        <li><a href="{{ url_for('auth.logout') }}">Log In</a>
+    {% endif %}
+{% endblock %}
