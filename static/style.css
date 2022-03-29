@@ -1,0 +1,7 @@
+html {
+  min-height: 100%;
+}
+body {
+  background: url("bg.png") repeat center;
+  min-height: 100%;
+}

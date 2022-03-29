@@ -107,6 +107,7 @@ def load_logged_in_user():
         g.user = get_db().query(models.User).filter(models.User.username == username).first()
 
 
+
 @bp.route('/logout')
 def logout():
     session.clear()

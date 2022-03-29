@@ -6,61 +6,63 @@
 
 {% block content %}
   <div class="flex p-4 m-6 justify-center">
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST">
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+    <form class="mx-auto mt-5" method="POST">
+      <div class="form-floating mb-3">
+        <input
+            class="form-control"
+            id="username" name="username" type="text" placeholder="username">
+        <label for="username">
           Username
         </label>
-        <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username" name="username" type="text">
       </div>
-      <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+      <div class="form-floating mb-3">
+        <input
+            class="form-control"
+            id="password" name="password" type="password" placeholder="password">
+        <label for="password">
           Password
         </label>
-        <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="password" name="password" type="password">
       </div>
-      <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="confirm-password">
+      <div class="form-floating mb-3">
+        <input
+            class="form-control"
+            id="confirm-password" name="confirm-password" type="password" placeholder="confirm password">
+        <label for="confirm-password">
           Confirm password
         </label>
-        <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="confirm-password" name="confirm-password" type="password">
       </div>
-      <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="first-name">
+      <div class="form-floating mb-3">
+        <input
+            class="form-control"
+            id="first-name" name="first-name" type="text" placeholder="first name">
+        <label for="first-name">
           First name
         </label>
-        <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="first-name" name="first-name" type="text">
       </div>
-      <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="last-name">
+      <div class="form-floating mb-3">
+        <input
+            class="form-control"
+            id="last-name" name="last-name" type="text" placeholder="last name">
+        <label for="last-name">
           Last name
         </label>
-        <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="last-name" name="last-name" type="text">
       </div>
-      <div class="mb-6">
-        <label for="coordinator">coordinator</label><br>
-        <input type="radio" id="coordinator" name="position" value="coordinator">
-        <label for="analyst">analyst</label><br>
-        <input type="radio" id="analyst" name="position" value="analyst">
-        <label for="unauthorized">unauthorized</label>
-        <input type="radio" id="unauthorized" name="position" value="unauthorized">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="coordinator" name="position" value="coordinator">
+        <label class="form-check-label" for="coordinator">coordinator</label>
       </div>
-      <div class="flex items-center justify-between">
-        <button type="submit"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          Add an employee
-        </button>
+      <div class="form-check">
+        <input checked type="radio" class="form-check-input" id="analyst" name="position" value="analyst">
+        <label class="form-check-label" for="analyst">analyst</label>
       </div>
+      <div class="form-check">
+        <input type="radio" class="form-check-input" id="unauthorized" name="position" value="unauthorized">
+        <label class="form-check-label" for="unauthorized">unauthorized</label>
+      </div>
+      <button type="submit"
+              class="btn btn-secondary">
+        Add an employee
+      </button>
     </form>
   </div>
 {% endblock %}

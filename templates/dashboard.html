@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block links %}
+  {{ js_resources|indent(4)|safe }}
+  {{ css_resources|indent(4)|safe }}
+  {{ plot_script|indent(4)|safe }}
+
+{% endblock %}
+
+{% block header %}
+  <h1>{% block title %}Dashboard{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+  {{ plot_div|indent(4)|safe }}
+
+{% endblock %}

@@ -42,6 +42,10 @@ def create_app(test_config=None):
         finally:
             db.close()
 
+    @app.context_processor
+    def handle_context():
+        return dict(position=models.Position)
+
     @app.errorhandler(404)
     def page_not_found(error):
         return render_template('page_not_found.html'), 404
