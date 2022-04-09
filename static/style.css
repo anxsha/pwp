@@ -5,3 +5,7 @@ body {
   background: url("bg.png") repeat center;
   min-height: 100%;
 }
+
+.bk-root{
+  width: fit-content;
+}

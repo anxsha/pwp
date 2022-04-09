@@ -13,6 +13,25 @@
 
 {% block content %}
 
-  {{ plot_div|indent(4)|safe }}
+  <ul class="nav justify-content-center" style="background-color: plum">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Brands</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('dashboard.categories') }}">Categories</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Popular</a>
+    </li>
+  </ul>
+
+  <div class="container-fluid flex">
+    <div class="p-4 d-flex mx-auto mt-4 justify-content-center">
+
+      {{ plot_div|indent(4)|safe }}
+
+    </div>
+  </div>
+
 
 {% endblock %}

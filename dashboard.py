@@ -20,7 +20,7 @@ def dashboard_index():
 
     db = get_db()
 
-    product = db.query(models.Product).filter(models.Product.name == "Cola zero").first()
+    product = db.query(models.Product).first()
 
     price_changes = product.price_changes
 
@@ -51,3 +51,12 @@ def dashboard_index():
         css_resources=css_resources,
     )
     return encode_utf8(html)
+
+
+@bp.route('/dashboard/categories')
+@login_required
+def categories():
+
+    db = get_db()
+
+    # db.query(models.ProductCategory)
