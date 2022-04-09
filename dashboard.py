@@ -17,7 +17,6 @@ bp = Blueprint('dashboard', __name__)
 @bp.route('/dashboard')
 @login_required
 def dashboard_index():
-
     db = get_db()
 
     product = db.query(models.Product).first()
@@ -53,10 +52,35 @@ def dashboard_index():
     return encode_utf8(html)
 
 
-@bp.route('/dashboard/categories')
+@bp.route('/dashboard/categories', defaults={'id': None})
+@bp.route('/dashboard/categories/<id>')
 @login_required
-def categories():
-
+def categories(id):
     db = get_db()
 
-    # db.query(models.ProductCategory)
+    cats = db.query(models.ProductCategory).all()
+
+    if id:
+        cats = db.query(models.ProductCategory).all()
+        category = db.query(models.ProductCategory).filter(models.ProductCategory.id == id).first()
+
+        return render_template('dashboard-category.html', category=category, categories=cats)
+
+    return render_template('dashboard-categories.html', categories=cats)
+
+
+@bp.route('/dashboard/products', defaults={'id': None})
+@bp.route('/dashboard/products/<id>')
+@login_required
+def products(id):
+    db = get_db()
+
+    cats = db.query(models.ProductCategory).all()
+
+    if id:
+        cats = db.query(models.ProductCategory).all()
+        category = db.query(models.ProductCategory).filter(models.ProductCategory.id == id).first()
+
+        return render_template('dashboard-category.html', category=category, categories=cats)
+
+    return render_template('dashboard-categories.html', categories=cats)

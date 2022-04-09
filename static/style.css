@@ -2,10 +2,16 @@ html {
   min-height: 100%;
 }
 body {
-  background: url("bg.png") repeat center;
+  background: url("bg1.png") repeat center ;
+  background-color: #DADBBD;
   min-height: 100%;
 }
 
 .bk-root{
   width: fit-content;
 }
+
+.navbar-dark{
+  color: white;
+}
+.nav-item .nav-link {color: white;}

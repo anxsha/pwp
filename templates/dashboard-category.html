@@ -1,14 +1,11 @@
 {% extends 'base.html' %}
 
 {% block links %}
-  {{ js_resources|indent(4)|safe }}
-  {{ css_resources|indent(4)|safe }}
-  {{ plot_script|indent(4)|safe }}
 
 {% endblock %}
 
 {% block header %}
-  <h1>{% block title %}Dashboard{% endblock %}</h1>
+  <h1>{% block title %}Categories{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -23,17 +20,26 @@
     <li class="nav-item">
       <a class="nav-link" href="#">Popular</a>
     </li>
-      <li class="nav-item">
+        <li class="nav-item">
       <a class="nav-link" href="{{ url_for('dashboard.products') }}">Products</a>
     </li>
   </ul>
 
-  <div class="container-fluid flex">
-    <div class="p-4 d-flex mx-auto mt-4 justify-content-center">
+  <ul class="nav justify-content-center" style="background-color: #388051">
+    {% for category in categories %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('dashboard.categories', id=category.id) }}">{{ category.name }}</a>
+      </li>
+    {% endfor %}
 
-      {{ plot_div|indent(4)|safe }}
+  </ul>
 
-    </div>
+  <div class="container-fluid flex" style="background-color: #78938A;color: white">
+  <h2>
+
+{{ category.name }}
+
+  </h2>
   </div>
 
 
