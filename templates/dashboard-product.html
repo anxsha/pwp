@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block links %}
+  {{ js_resources|indent(4)|safe }}
+  {{ css_resources|indent(4)|safe }}
+  {{ plot_script|indent(4)|safe }}
+
+{% endblock %}
+
+{% block header %}
+  <h1>{% block title %}Product search{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+  <ul class="nav justify-content-center" style="background-color: #D82148">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Brands</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('dashboard.categories') }}">Categories</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Popular</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('dashboard.products') }}">Products</a>
+    </li>
+  </ul>
+
+  <div class="nav justify-content-center" style="background-color: #388051">
+
+    <h2 style="color: white;">
+      {{ product.name }}
+    </h2>
+
+  </div>
+
+  <div class="container-fluid flex" style="background-color: #78938A;color: white">
+    <h3>Price changes:</h3>
+  </div>
+  {{ plot_div|indent(4)|safe }}
+
+
+
+
+{% endblock %}

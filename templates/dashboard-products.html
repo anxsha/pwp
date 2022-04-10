@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block header %}
+  <h1>{% block title %}Product search{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+  <ul class="nav justify-content-center" style="background-color: #D82148">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Brands</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('dashboard.categories') }}">Categories</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Popular</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('dashboard.products') }}">Products</a>
+    </li>
+  </ul>
+
+  <div class="nav justify-content-center" style="background-color: #388051">
+
+    <form method="post" action="{{ url_for('dashboard.products') }}">
+      <div class="input-group my-3">
+        <span class="input-group-text" id="basic-addon1">?</span>
+        <input type="text" class="form-control" name="product-name" placeholder="Search for a product">
+        <input type="submit" value="submit">
+      </div>
+    </form>
+  </div>
+
+  <div class="container-fluid flex" style="background-color: #78938A;color: white">
+    <ul class="nav justify-content-center">
+      {% for product in matching_products %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('dashboard.products', id=product.id) }}">{{ product.name }}</a>
+        </li>
+      {% endfor %}
+
+    </ul>
+  </div>
+
+
+
+
+{% endblock %}

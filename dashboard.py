@@ -62,25 +62,56 @@ def categories(id):
 
     if id:
         cats = db.query(models.ProductCategory).all()
-        category = db.query(models.ProductCategory).filter(models.ProductCategory.id == id).first()
+        # category = db.query(models.ProductCategory).filter(models.ProductCategory.id == id).first()
+        category = db.query(models.ProductCategory).get(id)
 
         return render_template('dashboard-category.html', category=category, categories=cats)
 
     return render_template('dashboard-categories.html', categories=cats)
 
 
-@bp.route('/dashboard/products', defaults={'id': None})
+@bp.route('/dashboard/products', defaults={'id': None}, methods=['GET', 'POST'])
 @bp.route('/dashboard/products/<id>')
 @login_required
 def products(id):
     db = get_db()
 
-    cats = db.query(models.ProductCategory).all()
-
+    if request.method == 'POST':
+        name = request.form['product-name']
+        matching_products = db.query(models.Product).filter(models.Product.name.contains(name)).limit(20)
+        return render_template('dashboard-products.html', matching_products=matching_products)
     if id:
-        cats = db.query(models.ProductCategory).all()
-        category = db.query(models.ProductCategory).filter(models.ProductCategory.id == id).first()
+        product = db.query(models.Product).get(id)
 
-        return render_template('dashboard-category.html', category=category, categories=cats)
+        price_changes = product.price_changes
 
-    return render_template('dashboard-categories.html', categories=cats)
+        prices = list()
+        dates = list()
+
+        for price_change in price_changes:
+            prices.append(price_change.price)
+            dates.append(price_change.datetime_of_change)
+
+        fig = figure(plot_width=600, plot_height=600, x_axis_type='datetime')
+        fig.line(
+            x=dates,
+            y=prices,
+            color='red',
+            line_width=1.5
+        )
+
+        js_resources = INLINE.render_js()
+        css_resources = INLINE.render_css()
+
+        script, div = components(fig)
+        html = render_template(
+            'dashboard-product.html',
+            product=product,
+            plot_script=script,
+            plot_div=div,
+            js_resources=js_resources,
+            css_resources=css_resources,
+        )
+        return encode_utf8(html)
+
+    return render_template('dashboard-products.html')

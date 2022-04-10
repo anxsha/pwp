@@ -74,7 +74,7 @@ class PriceChange(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
-    product_id = Column(Integer, ForeignKey('products.id'))
+    product_id = Column(Integer, ForeignKey('products.id'), index=True)
     product = relationship("Product", back_populates="price_changes")
 
     datetime_of_change = Column(DateTime)
@@ -96,7 +96,7 @@ class Sale(Base):
     id = Column(Integer, primary_key=True, index=True)
     datetime_of_sale = Column(DateTime)
 
-    product_id = Column(Integer, ForeignKey('products.id'))
+    product_id = Column(Integer, ForeignKey('products.id'), index=True)
     product = relationship("Product", back_populates="sales")
 
     sale_quantity = Column(Integer)
@@ -109,7 +109,7 @@ class Delivery(Base):
     id = Column(Integer, primary_key=True, index=True)
     datetime_of_delivery = Column(DateTime)
 
-    product_id = Column(Integer, ForeignKey('products.id'))
+    product_id = Column(Integer, ForeignKey('products.id'), index=True)
     product = relationship("Product", back_populates="deliveries")
 
     quantity = Column(Integer)
