@@ -3,6 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import sqlite3
 from flask import current_app, g
+import sqlalchemy.orm.session
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./pwp_db.db"
 
@@ -14,7 +15,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 
-def get_db():
+def get_db() -> sqlalchemy.orm.session.Session:
     if 'db' not in g:
         g.db = SessionLocal()
         g.db.row_factory = sqlite3.Row
