@@ -1,3 +1,5 @@
+from typing import List
+
 from bokeh.embed import components
 from bokeh.plotting import figure
 from bokeh.resources import INLINE
@@ -60,13 +62,20 @@ def categories(id):
 
     cats = db.query(models.ProductCategory).all()
 
+    rows_per_page = 20
+
     if id:
+        page = request.args.get('page', default=1, type=int)
+        if page < 1:
+            page = 1
         cats = db.query(models.ProductCategory).all()
-        # category = db.query(models.ProductCategory).filter(models.ProductCategory.id == id).first()
-        category = db.query(models.ProductCategory).get(id)
-
-        return render_template('dashboard-category.html', category=category, categories=cats)
-
+        category = db.query(models.ProductCategory).get(id)  # type: models.ProductCategory
+        total_count = len(category.products)
+        cat_products = db.query(models.Product).order_by(models.Product.brand_id)\
+            .filter(models.Product.category.has(name=category.name))\
+            .offset((int(page) - 1) * rows_per_page).limit(rows_per_page).all()
+        return render_template('dashboard-category.html', category=category, categories=cats,
+                               cat_products=cat_products, total_count=total_count, page=page, rows_per_page=rows_per_page)
     return render_template('dashboard-categories.html', categories=cats)
 
 

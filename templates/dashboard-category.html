@@ -20,7 +20,7 @@
     <li class="nav-item">
       <a class="nav-link" href="#">Popular</a>
     </li>
-        <li class="nav-item">
+    <li class="nav-item">
       <a class="nav-link" href="{{ url_for('dashboard.products') }}">Products</a>
     </li>
   </ul>
@@ -35,11 +35,42 @@
   </ul>
 
   <div class="container-fluid flex" style="background-color: #78938A;color: white">
-  <h2>
+    <h2>
+      {{ category.name }}
+    </h2>
 
-{{ category.name }}
+    Showing {{ cat_products|length }} out of {{ total_count }} in this category
+<br>
+    Page: {{ page }} out of {{ (total_count / rows_per_page)|round(0, 'ceil')|int }}
 
-  </h2>
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Brand</th>
+          <th scope="col">Product name</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in cat_products %}
+          <tr>
+            <td>{{ product.brand.name }}</td>
+            <td><a href="{{ url_for('dashboard.products', id=product.id) }}">{{ product.name }}</a></td>
+            <td>{{ product.current_price }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% if page > 1 %}
+      <a href="{{ url_for('dashboard.categories', id=category.id, page=page-1) }}">Previous</a>
+    {% endif %}
+
+    {% if page < (total_count / rows_per_page)|round(0, 'ceil')|int %}
+      <a href="{{ url_for('dashboard.categories', id=category.id, page=page+1) }}">Next</a>
+    {% endif %}
+
+
   </div>
 
 
