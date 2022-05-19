@@ -12,14 +12,14 @@
 
   <ul class="nav justify-content-center" style="background-color: #D82148">
     <li class="nav-item">
-      <a class="nav-link" href="#">Brands</a>
+      <a class="nav-link" href="{{ url_for('dashboard.brands') }}">Brands</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{{ url_for('dashboard.categories') }}">Categories</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Popular</a>
-    </li>
+{#    <li class="nav-item">#}
+{#      <a class="nav-link" href="#">Popular</a>#}
+{#    </li>#}
     <li class="nav-item">
       <a class="nav-link" href="{{ url_for('dashboard.products') }}">Products</a>
     </li>

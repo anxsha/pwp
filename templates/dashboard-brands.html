@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block header %}
-  <h1>{% block title %}Categories{% endblock %}</h1>
+  <h1>{% block title %}Brands{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -25,59 +25,47 @@
     </li>
   </ul>
 
-  <ul class="nav justify-content-center" style="background-color: #388051">
-    {% for category in categories %}
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('dashboard.categories', id=category.id) }}">{{ category.name }}</a>
-      </li>
-    {% endfor %}
-
-  </ul>
 
   <div class="container-fluid flex" style="background-color: #78938A;color: white">
-    <h2>
-      {{ category.name }}
-    </h2>
 
-    Showing {{ cat_products|length }} out of {{ total_count }} in this category
+
+    Showing {{ brands|length }} out of {{ total_count }} brands
     <br>
     Page: {{ page }} out of {{ (total_count / rows_per_page)|round(0, 'ceil')|int }}
 
     <br>
 
     {% if page > 1 %}
-      <a href="{{ url_for('dashboard.categories', id=category.id, page=page-1) }}">Previous</a>
+      <a href="{{ url_for('dashboard.brands', page=page-1) }}">Previous</a>
     {% endif %}
 
     {% if page < (total_count / rows_per_page)|round(0, 'ceil')|int %}
-      <a href="{{ url_for('dashboard.categories', id=category.id, page=page+1) }}">Next</a>
+      <a href="{{ url_for('dashboard.brands', page=page+1) }}">Next</a>
     {% endif %}
 
     <table class="table table-sm table-hover">
       <thead>
         <tr>
           <th scope="col">Brand</th>
-          <th scope="col">Product name</th>
-          <th scope="col">Price</th>
+          <th scope="col">Products count</th>
         </tr>
       </thead>
       <tbody>
-        {% for product in cat_products %}
+        {% for brand in brands %}
           <tr>
-            <td>{{ product.brand.name }}</td>
-            <td><a href="{{ url_for('dashboard.products', id=product.id) }}">{{ product.name }}</a></td>
-            <td>{{ product.current_price }}</td>
+            <td>{{ brand.name }}</td>
+            <td>{{ brand.products|length }}</td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
 
     {% if page > 1 %}
-      <a href="{{ url_for('dashboard.categories', id=category.id, page=page-1) }}">Previous</a>
+      <a href="{{ url_for('dashboard.brands', page=page-1) }}">Previous</a>
     {% endif %}
 
     {% if page < (total_count / rows_per_page)|round(0, 'ceil')|int %}
-      <a href="{{ url_for('dashboard.categories', id=category.id, page=page+1) }}">Next</a>
+      <a href="{{ url_for('dashboard.brands', page=page+1) }}">Next</a>
     {% endif %}
 
     <br>
