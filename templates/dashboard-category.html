@@ -46,11 +46,11 @@
     <br>
 
     {% if page > 1 %}
-      <a href="{{ url_for('dashboard.categories', id=category.id, page=page-1) }}">Previous</a>
+      <a class="btn btn-primary" href="{{ url_for('dashboard.categories', id=category.id, page=page-1) }}">Previous</a>
     {% endif %}
 
     {% if page < (total_count / rows_per_page)|round(0, 'ceil')|int %}
-      <a href="{{ url_for('dashboard.categories', id=category.id, page=page+1) }}">Next</a>
+      <a class="btn btn-primary" href="{{ url_for('dashboard.categories', id=category.id, page=page+1) }}">Next</a>
     {% endif %}
 
     <table class="table table-sm table-hover">
@@ -73,11 +73,11 @@
     </table>
 
     {% if page > 1 %}
-      <a href="{{ url_for('dashboard.categories', id=category.id, page=page-1) }}">Previous</a>
+      <a class="btn btn-primary" href="{{ url_for('dashboard.categories', id=category.id, page=page-1) }}">Previous</a>
     {% endif %}
 
     {% if page < (total_count / rows_per_page)|round(0, 'ceil')|int %}
-      <a href="{{ url_for('dashboard.categories', id=category.id, page=page+1) }}">Next</a>
+      <a class="btn btn-primary" href="{{ url_for('dashboard.categories', id=category.id, page=page+1) }}">Next</a>
     {% endif %}
 
     <br>

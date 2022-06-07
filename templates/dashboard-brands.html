@@ -29,6 +29,7 @@
   <div class="container-fluid flex" style="background-color: #78938A;color: white">
 
 
+
     Showing {{ brands|length }} out of {{ total_count }} brands
     <br>
     Page: {{ page }} out of {{ (total_count / rows_per_page)|round(0, 'ceil')|int }}
@@ -36,11 +37,12 @@
     <br>
 
     {% if page > 1 %}
-      <a href="{{ url_for('dashboard.brands', page=page-1) }}">Previous</a>
+
+      <a class="btn btn-primary" href="{{ url_for('dashboard.brands', page=page-1) }}">Previous</a>
     {% endif %}
 
     {% if page < (total_count / rows_per_page)|round(0, 'ceil')|int %}
-      <a href="{{ url_for('dashboard.brands', page=page+1) }}">Next</a>
+      <a class="btn btn-primary" href="{{ url_for('dashboard.brands', page=page+1) }}" class="button">Next</a>
     {% endif %}
 
     <table class="table table-sm table-hover">
@@ -61,11 +63,12 @@
     </table>
 
     {% if page > 1 %}
-      <a href="{{ url_for('dashboard.brands', page=page-1) }}">Previous</a>
+
+      <a class="btn btn-primary" href="{{ url_for('dashboard.brands', page=page-1) }}">Previous</a>
     {% endif %}
 
     {% if page < (total_count / rows_per_page)|round(0, 'ceil')|int %}
-      <a href="{{ url_for('dashboard.brands', page=page+1) }}">Next</a>
+      <a class="btn btn-primary" href="{{ url_for('dashboard.brands', page=page+1) }}">Next</a>
     {% endif %}
 
     <br>

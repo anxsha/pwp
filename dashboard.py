@@ -110,6 +110,28 @@ def products(id):
 
         price_changes = product.price_changes
 
+        sales = product.sales
+
+        sale_quantity = list()
+        sale_date = list()
+        sale_price = list()
+
+        for sale in sales:
+            sale_price.append(sale.sale_price)
+            sale_quantity.append(sale.sale_quantity)
+            sale_date.append(sale.datetime_of_sale)
+
+        deliveries = product.deliveries
+
+        delivery_quantity = list()
+        delivery_date = list()
+        delivery_price = list()
+
+        for delivery in deliveries:
+            delivery_price.append(delivery.unit_price)
+            delivery_quantity.append(delivery.quantity)
+            delivery_date.append(delivery.datetime_of_delivery)
+
         prices = list()
         dates = list()
 
@@ -117,23 +139,46 @@ def products(id):
             prices.append(price_change.price)
             dates.append(price_change.datetime_of_change)
 
-        fig = figure(plot_width=600, plot_height=600, x_axis_type='datetime')
-        fig.line(
+        fig_pc = figure(plot_width=600, plot_height=600, x_axis_type='datetime')
+        fig_pc.line(
             x=dates,
             y=prices,
             color='red',
             line_width=1.5
         )
 
+        fig_sales = figure(plot_width=600, plot_height=600, x_axis_type='datetime')
+        fig_sales.line(
+            x=sale_date,
+            y=sale_quantity,
+            color='green',
+            line_width=1.5
+        )
+
+        fig_del = figure(plot_width=600, plot_height=600, x_axis_type='datetime')
+        fig_del.line(
+            x=delivery_date,
+            y=delivery_quantity,
+            color='blue',
+            line_width=1.5
+        )
+
+
         js_resources = INLINE.render_js()
         css_resources = INLINE.render_css()
 
-        script, div = components(fig)
+        script_pc, div_pc = components(fig_pc)
+        script_sales, div_sales = components(fig_sales)
+        script_del, div_del = components(fig_del)
         html = render_template(
             'dashboard-product.html',
             product=product,
-            plot_script=script,
-            plot_div=div,
+            plot_script_pc=script_pc,
+            plot_script_sales=script_sales,
+            plot_script_del=script_del,
+            plot_div_pc=div_pc,
+            plot_div_sales=div_sales,
+            plot_div_del=div_del,
             js_resources=js_resources,
             css_resources=css_resources,
         )

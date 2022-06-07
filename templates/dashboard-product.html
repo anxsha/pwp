@@ -3,7 +3,11 @@
 {% block links %}
   {{ js_resources|indent(4)|safe }}
   {{ css_resources|indent(4)|safe }}
-  {{ plot_script|indent(4)|safe }}
+  {{ plot_script_pc|indent(4)|safe }}
+  {{ plot_script_sales|indent(4)|safe }}
+  {{ plot_script_del|indent(4)|safe }}
+
+
 
 {% endblock %}
 
@@ -39,7 +43,21 @@
   <div class="container-fluid flex" style="background-color: #78938A;color: white">
     <h3>Price changes:</h3>
   </div>
-  {{ plot_div|indent(4)|safe }}
+  {{ plot_div_pc|indent(4)|safe }}
+{% if product.sales|length > 0 %}
+  <div class="container-fluid flex" style="background-color: #78938A;color: white">
+  <h3>Sales:</h3>
+  </div>
+  {{ plot_div_sales|indent(4)|safe }}
+{% endif %}
+{% if product.deliveries|length > 0 %}
+  <div class="container-fluid flex" style="background-color: #78938A;color: white">
+  <h3>Deliveries:</h3>
+  </div>
+  {{ plot_div_del|indent(4)|safe }}
+{% endif %}
+
+
 
 
 
